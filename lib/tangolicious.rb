@@ -1,4 +1,5 @@
 require 'tangolicious/version'
+require 'tangolicious/customer'
 
 module Tangolicious
 
