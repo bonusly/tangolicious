@@ -1,26 +1,26 @@
 require 'tangolicious/request'
 
 module Tangolicious
-  class Customer < Request
+  class Order < Request
     class << self
       def list
         new.get(endpoint)
       end
 
-      def accounts(id)
-        new.get("#{endpoint}/#{id}/accounts")
+      def retrieve(id)
+        new.get("#{endpoint}/#{id}")
       end
 
       def create(params)
         new.post(endpoint, params)
       end
 
-      def create_account(id)
-        new.post("#{endpoint}/#{id}/accounts", params)
+      def resend(params)
+        new.post("#{endpoint}/#{id}/resends", params)
       end
 
       def endpoint
-        'customers'
+        'orders'
       end
     end
   end

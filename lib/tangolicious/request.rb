@@ -6,8 +6,8 @@ module Tangolicious
       HTTParty.get("#{Tangolicious.api_base}#{endpoint}", basic_auth: basic_auth)
     end
 
-    def post(endpoint)
-      HTTParty.post("#{Tangolicious.api_base}#{endpoint}", basic_auth: basic_auth)
+    def post(endpoint, params)
+      HTTParty.post("#{Tangolicious.api_base}#{endpoint}", basic_auth: basic_auth, body: params.to_json)
     end
 
     private
