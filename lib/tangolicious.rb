@@ -1,5 +1,9 @@
 require 'tangolicious/version'
 require 'tangolicious/customer'
+require 'tangolicious/account'
+require 'tangolicious/credit_card'
+require 'tangolicious/catalog'
+require 'tangolicious/order'
 
 module Tangolicious
 
