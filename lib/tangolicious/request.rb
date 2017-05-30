@@ -1,4 +1,5 @@
 require 'httparty'
+require 'active_support/inflector'
 
 module Tangolicious
   class Request
@@ -10,11 +11,15 @@ module Tangolicious
     def post(endpoint, params)
       parsed_response(HTTParty.post("#{Tangolicious.api_base}#{endpoint}",
                                     basic_auth: basic_auth,
-                                    body: params.to_json,
+                                    body: tangocard_camelize(params).to_json,
                                     headers: headers))
     end
 
     private
+
+    def tangocard_camelize(s)
+      s.to_s.camelize(:lower).gsub(/Id$/, 'ID').to_sym
+    end
 
     def parsed_response(response)
       JSON.parse(response.body)

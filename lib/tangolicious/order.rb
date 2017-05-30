@@ -1,53 +1,31 @@
 require 'tangolicious/request'
+require 'tangolicious/resource'
 
 module Tangolicious
-  class Order < Request
+  class Order < Resource
     class << self
-      def list
-        new.get(endpoint)
-      end
-
-      def retrieve(id)
-        new.get("#{endpoint}/#{id}")
-      end
-
-      def create(params)
-        new.post(endpoint, create_order_criteria(params))
-      end
-
       def resend(params)
         new.post("#{endpoint}/#{id}/resends", params)
       end
 
+      def create(params)
+        # bad_params = params.keys - allowed_create_params
+        # raise "Invalid param: #{}" unless
+        new.request.post(endpoint, params)
+      end
+
       private
+
+      # def allowed_create_params
+      #   %i[account_identifier amount campaign customer_identifier email_subject external_ref_id message notes recipient send_email sender utid]
+      # end
+      #
+      # def required_create_params
+      #   %i[account_identifier amount customer_identifier utid]
+      # end
 
       def endpoint
         'orders'
-      end
-
-      def create_order_criteria(params)
-        {
-          accountIdentifier: params[:account_identifier],
-          amount: params[:amount],
-          campaign: params[:campaign],
-          customerIdentifier: params[:customer_identifier],
-          emailSubject: params[:email_subject],
-          externalRefID: params[:external_ref_id],
-          message: params[:message],
-          notes: params[:notes],
-          recipient: {
-            email: params[:email],
-            firstName: params[:first_name],
-            lastName: params[:last_name]
-          },
-          sendEmail: params[:send_email],
-          sender: {
-            email: params[:email],
-            firstName: params[:first_name],
-            lastName: params[:last_name]
-          },
-          utid: params[:utid]
-        }
       end
     end
   end

@@ -1,10 +1,15 @@
 require 'tangolicious/request'
+require 'tangolicious/resource'
 
 module Tangolicious
-  class Catalog < Request
+  class Catalog < Resource
     class << self
       def list
-        new.get(endpoint)
+        wrap(new.request.get(endpoint)['brands'])
+      end
+
+      def name
+        new.request.get(endpoint)['catalogName']
       end
 
       def endpoint

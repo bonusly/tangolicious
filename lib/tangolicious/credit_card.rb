@@ -23,6 +23,8 @@ module Tangolicious
         new.post('creditCardDeposits', params)
       end
 
+      private
+
       def endpoint
         'creditCards'
       end

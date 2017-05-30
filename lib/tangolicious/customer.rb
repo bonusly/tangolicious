@@ -19,6 +19,8 @@ module Tangolicious
         new.post("#{endpoint}/#{id}/accounts", params)
       end
 
+      private
+
       def endpoint
         'customers'
       end

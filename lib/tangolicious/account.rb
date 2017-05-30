@@ -11,6 +11,8 @@ module Tangolicious
         new.get("#{endpoint}/#{id}")
       end
 
+      private
+
       def endpoint
         'accounts'
       end
