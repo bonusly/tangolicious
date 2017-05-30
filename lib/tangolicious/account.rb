@@ -1,16 +1,9 @@
 require 'tangolicious/request'
+require 'tangolicious/resource'
 
 module Tangolicious
-  class Account < Request
+  class Account < Resource
     class << self
-      def list
-        new.get(endpoint)
-      end
-
-      def retrieve(id)
-        new.get("#{endpoint}/#{id}")
-      end
-
       private
 
       def endpoint

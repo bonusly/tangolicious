@@ -16,22 +16,31 @@ module Tangolicious
       new(request.get("#{endpoint}/#{id}"))
     end
 
+    def self.request
+      @request ||= Request.new
+    end
+
     def initialize(attributes = {})
       super(underscorize_keys(attributes))
     end
 
-    def request
-      @request ||= Request.new
-    end
-
     private
+
+    def underscorize_keys(attributes)
+      attributes.each_with_object({}) do |item, hash|
+        key, value = item
+        hash[rubyize(key)] = if value.is_a?(Hash)
+                               underscorize_keys(value)
+                             elsif value.is_a?(Array)
+                               value.map { |el| el.is_a?(Hash) ? underscorize_keys(el) : el }
+                             else
+                               value
+                             end
+      end
+    end
 
     def rubyize(s)
       s.to_s.underscore.downcase.to_sym
-    end
-
-    def underscorize_keys(attributes)
-      attributes.each_with_object({}) { |item, hash| hash[rubyize(item.first)] = item.last }
     end
 
     def attributes_for_request

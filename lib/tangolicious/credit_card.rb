@@ -1,16 +1,9 @@
 require 'tangolicious/request'
+require 'tangolicious/resource'
 
 module Tangolicious
-  class CreditCard < Request
+  class CreditCard < Resource
     class << self
-      def list
-        new.get(endpoint)
-      end
-
-      def retrieve(id)
-        new.get("#{endpoint}/#{id}")
-      end
-
       def register(params)
         new.post(endpoint, params)
       end
