@@ -4,15 +4,15 @@ require 'tangolicious/resource'
 module Tangolicious
   class CreditCard < Resource
     def self.register(params)
-      new.post(endpoint, params)
+      request.post(endpoint, params)
     end
 
     def self.unregister(params)
-      new.post('creditCardUnregisters', params)
+      request.post('creditCardUnregisters', params)
     end
 
     def self.fund(params)
-      new.post('creditCardDeposits', params)
+      request.post('creditCardDeposits', params)
     end
 
     def self.endpoint
