@@ -1,9 +1,12 @@
 require 'tangolicious/request'
+require 'tangolicious/util'
 require 'active_support'
 require 'active_support/inflector'
 
 module Tangolicious
   class Resource < OpenStruct
+    include Util
+
     def self.wrap(resources)
       resources.map { |resource| new(resource) }
     end
@@ -27,24 +30,11 @@ module Tangolicious
     private
 
     def underscorize_keys(attributes)
-      attributes.each_with_object({}) do |item, hash|
-        key, value = item
-        hash[rubyize(key)] = if value.is_a?(Hash)
-                               underscorize_keys(value)
-                             elsif value.is_a?(Array)
-                               value.map { |el| el.is_a?(Hash) ? underscorize_keys(el) : el }
-                             else
-                               value
-                             end
-      end
+      call_recursively(attributes, :rubyize)
     end
 
     def rubyize(s)
       s.to_s.underscore.downcase.to_sym
-    end
-
-    def attributes_for_request
-      to_h.each_with_object({}) { |item, hash| hash[tangocard_camelize(item.first)] = item.last }
     end
   end
 end

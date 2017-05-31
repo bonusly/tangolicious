@@ -8,7 +8,7 @@ module Tangolicious
     end
 
     def self.create(params)
-      request.post(endpoint, params)
+      new(request.post(endpoint, params))
     end
 
     def self.endpoint
