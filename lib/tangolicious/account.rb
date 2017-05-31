@@ -3,12 +3,8 @@ require 'tangolicious/resource'
 
 module Tangolicious
   class Account < Resource
-    class << self
-      private
-
-      def endpoint
-        'accounts'
-      end
+    def self.endpoint
+      'accounts'
     end
   end
 end

@@ -3,18 +3,16 @@ require 'tangolicious/resource'
 
 module Tangolicious
   class Catalog < Resource
-    class << self
-      def list
-        wrap(new.request.get(endpoint)['brands'])
-      end
+    def self.list
+      wrap(new.request.get(endpoint)['brands'])
+    end
 
-      def name
-        new.request.get(endpoint)['catalogName']
-      end
+    def self.name
+      new.request.get(endpoint)['catalogName']
+    end
 
-      def endpoint
-        'catalogs'
-      end
+    def self.endpoint
+      'catalogs'
     end
   end
 end
