@@ -4,7 +4,7 @@ require 'tangolicious/resource'
 module Tangolicious
   class Catalog < Resource
     def self.list
-      wrap(request.get(endpoint)['brands'])
+      Brand.wrap(request.get(endpoint)['brands'])
     end
 
     def self.name

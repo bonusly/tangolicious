@@ -4,6 +4,7 @@ require 'tangolicious/account'
 require 'tangolicious/credit_card'
 require 'tangolicious/catalog'
 require 'tangolicious/order'
+require 'tangolicious/brand'
 
 module Tangolicious
 
