@@ -77,13 +77,13 @@ Tangolicious::Customer.create_account('my_customer', account_identifier: 'my_acc
 List all accounts
 
 ```ruby
-Tangolicious::Customer.list
+Tangolicious::Account.list
 ```
 
 Retrieve an account
 
 ```ruby
-Tangolicious::Customer.retrieve('my_account')
+Tangolicious::Account.retrieve('my_account')
 ```
 
 #### Fund
