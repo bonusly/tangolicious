@@ -97,7 +97,7 @@ Tangolicious::CreditCard.fund(amount: 100, credit_card_token: 'cc_token', accoun
 Unregister a credit card
 
 ```ruby
-Tangolicious::CreditCard.fund(credit_card_token: 'cc_token')
+Tangolicious::CreditCard.unregister(credit_card_token: 'cc_token')
 ```
 
 List all credit cards
