@@ -5,5 +5,6 @@ module Tangolicious
     class InsufficientFunds < StandardError; end
     class Forbidden < StandardError; end
     class ServiceUnavailable < StandardError; end
+    class UnprocessableEntity < StandardError; end
   end
 end

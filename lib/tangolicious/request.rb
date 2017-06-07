@@ -29,6 +29,7 @@ module Tangolicious
       raise Exceptions::Unauthorized.new(response) if response.fetch('httpCode', nil) == 401
       raise Exceptions::InsufficientFunds.new(response) if response.fetch('httpCode', nil) == 402
       raise Exceptions::Forbidden.new(response) if response.fetch('httpCode', nil) == 403
+      raise Exceptions::UnprocessableEntity.new(response) if response.fetch('httpCode', nil) == 422
       raise Exceptions::ServiceUnavailable.new(response) if response.fetch('httpCode', nil) == 503
       response
     end

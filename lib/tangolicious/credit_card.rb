@@ -4,7 +4,7 @@ require 'tangolicious/resource'
 module Tangolicious
   class CreditCard < Resource
     def self.register(params)
-      request.post(endpoint, params)
+      new(request.post(endpoint, params))
     end
 
     def self.unregister(params)
