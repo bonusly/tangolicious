@@ -36,6 +36,8 @@ Tangolicious.account_identifier = ACCOUNT_IDENTIFIER
 Tangolicious.customer_identifier = CUSTOMER_IDENTIFIER
 ```
 
+See https://integration-www.tangocard.com/raas_api_console/v2/ for more detailed documentation about request and response parameters.
+
 #### Customers
 
 List all customers
@@ -139,7 +141,8 @@ Tangolicious::CreditCard.retrieve('cc_token')
 List all catalog brands
 
 ```ruby
-Tangolicious::Catalog.list
+response = Tangolicious::Catalog.list
+brands = response[:brands]
 ```
 
 #### Orders
@@ -148,8 +151,6 @@ List all orders
 
 ```ruby
 response = Tangolicious::Order.list
-response[:page]
-> {"number"=>0, "elementsPerBlock"=>100, "resultCount"=>4, "totalCount"=>4}
 orders = response[:orders]
 ```
 
@@ -165,7 +166,7 @@ Retrieve an order
 Tangolicious::Order.retrieve('reference_order_id')
 ```
 
-Resend the email an order
+Resend the email for an order
 
 ```ruby
 Tangolicious::Order.resend('reference_order_id')
