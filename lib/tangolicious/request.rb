@@ -13,10 +13,10 @@ module Tangolicious
       check_errors(response)
     end
 
-    def post(endpoint, params)
+    def post(endpoint, params = {})
       response = parsed_response(HTTParty.post("#{Tangolicious.api_base}#{endpoint}",
                                                basic_auth: basic_auth,
-                                               body: camelize_keys(params).to_json,
+                                               body: camelize_keys(default_params.merge(params)).to_json,
                                                headers: headers))
       check_errors(response)
     end
@@ -29,9 +29,17 @@ module Tangolicious
       raise Exceptions::Unauthorized.new(response) if response.fetch('httpCode', nil) == 401
       raise Exceptions::InsufficientFunds.new(response) if response.fetch('httpCode', nil) == 402
       raise Exceptions::Forbidden.new(response) if response.fetch('httpCode', nil) == 403
+      raise Exceptions::NotFound.new(response) if response.fetch('httpCode', nil) == 404
       raise Exceptions::UnprocessableEntity.new(response) if response.fetch('httpCode', nil) == 422
       raise Exceptions::ServiceUnavailable.new(response) if response.fetch('httpCode', nil) == 503
       response
+    end
+
+    def default_params
+      {
+        account_identifier: Tangolicious.account_identifier,
+        customer_identifier: Tangolicious.customer_identifier
+      }.compact
     end
 
     def camelize_keys(attributes)

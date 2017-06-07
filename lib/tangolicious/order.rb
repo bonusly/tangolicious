@@ -3,8 +3,13 @@ require 'tangolicious/resource'
 
 module Tangolicious
   class Order < Resource
-    def self.resend(params)
-      request.post("#{endpoint}/#{id}/resends", params)
+    def self.list
+      response = request.get(endpoint)
+      { page: response['page'], orders: self.wrap(response['orders']) }
+    end
+
+    def self.resend(id)
+      request.post("#{endpoint}/#{id}/resends")
     end
 
     def self.create(params)

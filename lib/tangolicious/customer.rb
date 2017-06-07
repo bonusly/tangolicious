@@ -11,7 +11,7 @@ module Tangolicious
       new(request.post(endpoint, params))
     end
 
-    def self.create_account(id)
+    def self.create_account(id, params)
       Account.new(request.post("#{endpoint}/#{id}/accounts", params))
     end
 
