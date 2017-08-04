@@ -11,8 +11,8 @@ module Tangolicious
       resources.map { |resource| new(resource) }
     end
 
-    def self.list
-      wrap(request.get(endpoint))
+    def self.list(params = {})
+      wrap(request.get(endpoint, params))
     end
 
     def self.retrieve(id)

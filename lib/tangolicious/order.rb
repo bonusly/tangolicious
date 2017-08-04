@@ -3,8 +3,8 @@ require 'tangolicious/resource'
 
 module Tangolicious
   class Order < Resource
-    def self.list
-      response = request.get(endpoint)
+    def self.list(params = {})
+      response = request.get(endpoint, params)
       { page: response['page'], orders: self.wrap(response['orders']) }
     end
 

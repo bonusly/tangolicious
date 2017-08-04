@@ -1,5 +1,6 @@
 require 'httparty'
 require 'active_support/inflector'
+require 'addressable/uri'
 require 'tangolicious/util'
 require 'tangolicious/exceptions'
 
@@ -7,8 +8,8 @@ module Tangolicious
   class Request
     include Util
 
-    def get(endpoint)
-      response = parsed_response(HTTParty.get("#{Tangolicious.api_base}#{endpoint}",
+    def get(endpoint, params = {})
+      response = parsed_response(HTTParty.get("#{Tangolicious.api_base}#{endpoint}?#{query_string(params)}",
                                               basic_auth: basic_auth))
       check_errors(response)
     end
@@ -22,6 +23,12 @@ module Tangolicious
     end
 
     private
+
+    def query_string(params)
+      uri = Addressable::URI.new
+      uri.query_values = camelize_keys(params)
+      uri.query
+    end
 
     def check_errors(response)
       return response if response.is_a?(Array)
