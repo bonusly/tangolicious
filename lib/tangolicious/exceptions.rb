@@ -6,6 +6,7 @@ module Tangolicious
     class Forbidden < StandardError; end
     class NotFound < StandardError; end
     class UnprocessableEntity < StandardError; end
+    class InternalServiceError < StandardError; end
     class ServiceUnavailable < StandardError; end
   end
 end
